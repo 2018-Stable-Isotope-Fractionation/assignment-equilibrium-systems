@@ -10,6 +10,7 @@
  2. Make sure that the code in `assignment.Rmd` passes linting checks and renders/knits successfully to HTML
  3. Submit by creating a pull request with `submit` as the **base branch** and your instructor as the reviewer
 
+
 ## Setup
 
 1. Login: log into the RStudio Server with your username and password
@@ -30,4 +31,5 @@
  - commit this change to the `README.md` and push it to GitHub
  - as soon as your instructor activates the automatic code checking and the first check completes (usually within a few hours), the code checking will run automatically after every single commit (typically within 2-5 minutes) and show you in red if there are problems (`build failing`) or in green if your code has run without any trouble (`build passing`)
  - if you want to see details about the status of the code check after a commit, you should be able to click on the status badge to get to Travis CI (click **Sign in with GitHub** and enter your GitHub credentials, you may have to sign out and back in if you access it for the first time on a new repository)
+
 
