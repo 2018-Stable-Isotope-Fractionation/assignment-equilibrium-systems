@@ -1,0 +1,281 @@
+---
+title: "Mass Balance & Equilibrium Systems"
+date: "`r format(Sys.Date(), '%d %b %Y')`"
+output:
+  html_document: 
+    df_print: paged
+    toc: yes
+    toc_depth: 2
+    toc_float: true
+    code_folding: show
+editor_options:
+  chunk_output_type: inline
+---
+
+
+```{r "load packages", include=FALSE}
+library(tidyverse)
+library(readxl)
+library(latex2exp)
+```
+
+
+# 1. Mass balance in $\delta$-space approximation
+
+In this exercise we will explore how large an error is introduced by doing mass-balance calculations in $\delta$-space instead of fractional abundance space. Keep in mind the following two equations for exact (in $F$ space) and approximate (in $\delta$ space) mass balance:
+
+$$
+\begin{aligned}
+\text{exact : }& m_T \cdot F_T = \sum m_i \cdot F_i \\
+\text{approx. : }& m_T \cdot \delta_T = \sum m_i \cdot \delta_i
+\end{aligned}
+$$
+
+## 1A: Calculate error for carbon system
+
+Consider a system with two components $a$ and $b$, each making up 50% of the total isotopic pool ($f_a = f_b = 0.5$), with $\delta_a$ varying from -100‰ to +100‰ by steps of 10‰ and $\delta_b$ = 0‰ under all conditions. Calculate the resulting $\delta_T$ by appoximate (column `delta_t_approx`) and exact (column `delta_t_exact`) mass balance as well as the derived difference (column `delta_error = delta_t_approx - delta_t_exact`) all in permil notation for a carbon isotope system with reference ratio $R_{ref} = 0.01$. Store the resulting data frame in variable `df_1a_carbon`. Hint: the exact calculation requires conversion from $\delta$ space to fractional abundance and then back again to $\delta$ space. 
+
+```{r}
+
+```
+
+## 1B: Calculate error for boron system
+
+Make the exact same calculation for a boron isotope system with the same $\delta$ values but reference ratio $R_{ref} = 4.0$ (yes, Boron-11 is more 4x more abundane than Boron-10! it's one of the unusal light isotope systems). Store the resulting data frame in variable `df_1b_boron`.
+
+```{r}
+
+```
+
+## 1C: Compare
+
+Combine the two data frames (`df_1a_carbon` and `df_1b_boron`) into a new variable (`df_1c`) using the `bind_rows` function. Plot `delta_error` against `delta_a` and store the plot in the variable `p_1c`, chose suitable aesthetics to be able to tell the carbon and boron system apart. What is the maximum error in the two isotope systems? Where in the $\delta$ space does it occur? What does this mean for isotopic calculations such as the one we made together in class for the boron system?
+
+```{r}
+
+```
+
+## 1D: Bonus
+
+Starting with the exact mass balance equation below, show analytically what the error introduced by the mass-balance in $\delta$ space introduces.
+
+# 2. Isotopes as tracers
+
+Within the plant kingdom, there are three different photosynthetic pathways: the C3, C4, and Crassulacean Acid Metabolism (CAM) pathways; for this question will focus on just C3 and C4 plants. Many temperate plants utilize the C3 pathway, including all woody trees and grains such as wheat and barley, legumes such as beans, and tubers such as potatos. Plants in hotter and drier climates tend to utilize the C4 pathway, including many grasses and shrubs as well as some agricultural crops like corn and sugar cane. These different pathways introduce different isotopic signatures in the plant tissue, with C3 plants typically having a lower isotope composition than C4 plants (we will get into **why** this is later this semester). The median carbon isotope composition for C3 plants is -27‰, whereas the median value for C4 plants is -14‰ (vs. the VPDB standard).
+
+An importer of high quality rum procures 3 new products (A, B and C) but wants to make sure that they really are top quality and made from 100% sugarcane. Suspecting that one of the manufactueres might have stretched their rum with cheap, potato-derived ethanol, you measure the isotope compositions of the ethanol in each sample (vs. VPDB) and find that $\delta^{13}C_A$=-10.2‰, $\delta^{13}C_B$=-18.9‰ and $\delta^{13}C_C$=-15.3‰. Assuming that the ethanol directly reflects the isotopic composition of its source, answer the following questions:
+
+## 2A: Derive the relevant equation
+
+Use the closed system mass-balance equations to derive an expression for $f_P$ - the fraction of potato-derived ethanol - as a function of the total isotopic composition $\delta_T$ and the isotopic composition of the potato $\delta_P$ and sugarcane $\delta_S$ end-members. 
+
+$$
+
+$$
+
+## 2B: Authentic rum?
+
+Based strictly on the numbers provided above, what percentage of the ethanol would you estimate to be potentially derived from the lower quality ingredient for each of the 3 new products? Store the result in column `f_potato` in a data frame named `df_2b` and comment on what you would tell the importer about the quality of their 3 new products.
+
+```{r}
+
+```
+
+> Solution: Product A is most likely authentic (i.e. all derived from sugarcane) with the isotopic composition below the median for C4 plants wherease products B and C are suspicious with their isotopic composition higher than the median for C4 plants. Specifically, products B and C are suspicious with potentially ~37.7% of the ethanol in B and 10% in C derived from potato instead.
+
+## 2C: More nuanced evaluation
+
+Recognizing that the possible range of isotopic compositions for C3 is actually -22‰ to -30‰ and -9‰ to -16‰ for C4, how confident can you be in your evaluation? Store the resulting data frame in variable `df_2c`. Briefly explain your answer.
+
+```{r}
+
+```
+
+
+# 3. Equilibrium fractionation of oxygen in CO2 and H2O
+
+## 3A: Theoretical prediction
+
+Recall the data set we generated in class when calculating the theoretically predicted fractionation factor between gaseous $CO_2$ and $H_2O$ (i.e. water vapour). The excel file `output_alphas.xlsx` in the `data` folder contains the exported final numbers we calculated. Use the `read_excel` function from the `readxl` package to read the dataset and store it in variable `df_3a` (use the `file.path` function to construct the path).
+
+```{r}
+
+```
+
+## 3B: Empirical fit
+
+Laboratory measurements have lead to the following empirical temperature relationship for the oxygen fractionation factors between $CO_2$ and liquid water, and between liquid and gaseous water (all $T$ in Kelvin): 
+
+$$
+\begin{aligned}
+\alpha_{CO_2/H_2O(l)} &= \frac{17.604}{T} + 0.98211 \\
+\alpha_{H_2O(l)/H_2O(v)} &= e^{\frac{1.137 \cdot 10^3}{T^2} - \frac{0.4156}{T} - \frac{2.0667}{10^3}}
+\end{aligned}
+$$
+
+### I.
+
+Write a function for each of these fractionation factors,called `calculate_alpha_co2_vs_lh2o` and `calculate_alpha_h2ol_vs_h2og`, respectively. Both must take at least one parameter called `temp_celsius` (temperature in celsius) and return the resulting fractionation factor.
+
+```{r}
+#' @param temp_celsius temperature in celsius
+#' @return fractionation factor between CO2 gas and liquid water
+calculate_alpha_co2_vs_lh2o <- function() {
+  
+}
+
+#' @param temp_celsius temperature in celsius
+#' @return fractionation factor between liquid and gaseous water
+calculate_alpha_h2ol_vs_h2og <- function() {
+  
+}
+
+```
+
+### II.
+
+Mutate the data frame with the theoretical fractionation factors to calculate both empirical fractionation factors for the same temperatures as the theoretical estimates. Use the two empirical fractionation factors to calculate an empirical $\alpha_{CO_2/H_2O(g)}$ (name the column `alpha_co2_vs_gh2o_emp`) and store the resulting data frame in variable `df_3b`.
+
+```{r}
+
+```
+
+## 3C: Comparison
+
+Plot the theoretical and empirical estimate of $\alpha_{CO_2/H_2O(g)}$ as $\epsilon$ values in ‰ on the same plot (store the plot in variable `p_3c`) and comment on what you observe.
+
+```{r}
+# solution
+
+```
+
+
+# 4. Carbonate thermometry
+
+Friedman and O'Neil (1977) list the following temperature relationship for the equilibrium oxygen isotope fractionation factor between calcium carbonate and water ($^{18}\alpha_{CC/H2O}$) for the temperature range 0 to 500 Celsius in their *Compilation of Stable Isotope Fractionation Factors of Geochemical Interest* for the USGS (temperature $T$ in Kelvin): 
+
+$$
+\ln \, \alpha_{CC/H2O} = 2.78 \cdot 10^6 \frac{1}{T^2} - 2.89
+$$
+
+## 4A: Fractionation factor
+
+### I.
+
+Write a function for this fractionation factor called `calculate_alpha_cc_vs_lh2o`, again with at least one parameter called `temp_celsius` (temperature in celsius) and return the resulting fractionation factor.
+
+```{r}
+#' @param temp_celsius temperature in celsius
+#' @return fractionation factor between CO2 gas and liquid water
+calculate_alpha_cc_vs_lh2o <- function() {
+  
+}
+
+```
+
+### II.
+ 
+Visualize the  $\epsilon_{CC/H2O}$ (in ‰) vs. temperature over the range of 0 to 500 C (store the plot in variable `p_4a`). 
+ 
+```{r}
+
+```
+
+### III.
+
+Based on the values of $\alpha_{CC/H2O}$ (or $\epsilon_{CC/H2O}$), is the calcite or water isotopically heavier? Why does or doesn't this make sense based on your understanding of equilibrium isotope effects?
+
+
+
+### IV. 
+
+Where do you find the highest and lowest fractionation? Why does or doesn't this make sense?
+
+ 
+
+## 4B: Application: hydrothermal system
+
+You find a calcite in a hydrothermal vent system and measure its isotopic composition to be 10‰. Fluid inclusion evidence indicates that the calcite formed from hydrothermal fluid at 120 Celsius. What was the $\delta^{18}O$ of the hydrothermal water? Store the answer in variable `delta_water` (in ‰). Hint: use the function you already wrote.
+
+```{r}
+
+```
+
+## 4C: Application: closed system at equilibrium
+
+A closed system contains 1 mole of calcite ($CaCO_3$) with $\delta^{18}O$ = 10‰ and 1 mole of water with $\delta^{18}O$ = 0‰. You equilibrate the mixture at 400 Celsius. What is the isotopic composition of each component after equilibration? Hint: since this is a closed system situation, $\delta_T$ remains constant. All mass balance calculations can be done in $\delta$ space but fractionation calculations should be exact (i.e. no $\alpha \approx 1$ simplifications). 
+
+### I. 
+
+Write out the equation for $\delta_T$ based on the initial isotopic compositions (subscript $i$) and the equations for the final isotopic compositions $\delta_{CC_f}$ and $\delta_{H_2O_f}$.
+
+
+$$
+
+$$
+
+### II. 
+
+Calculate the resulting values of $\delta_T$, $\delta_{CC_f}$ and $\delta_{H_2O_f}$ and store them in variables `delta_total`, `delta_cc_final` and `delta_h2o_final`, respectively.
+
+```{r}
+
+```
+
+# 5. Code checks
+
+> The following are automated tests for Travis. Run the chunk to see if your code is complete and passes all the tests. The chunk will stop at the first test that does not pass. If you get an error, see if you can figure out what might be missing in your code (do not edit this chunk!). Once all tests run without errors, the file knits successfully (`Knit to HTML` in the `Knit` menu), and your code passes linting (`Lint current file` command from the `Addins` menu) without warnings, your assignment is ready for submission.
+
+```{r "tests", echo = FALSE, warning=FALSE, message=FALSE}
+source(file.path("libs", "test_functions.R"))
+
+expect_names("1A", df_1a_carbon, 
+                  c("delta_t_approx", "delta_t_exact", "delta_error"))
+expect_value("1A", df_1a_carbon, 0.025, function(x) max(x$delta_error), 3)
+
+expect_names("1B", df_1b_boron, 
+                  c("delta_t_approx", "delta_t_exact", "delta_error"))
+expect_value("1B", df_1b_boron, 2.08, function(x) max(x$delta_error), 2)
+
+expect_names("1C", df_1c, 
+                  c("delta_t_approx", "delta_t_exact", "delta_error"))
+
+expect_class("1C", p_1c, "ggplot")
+
+expect_names("2B", df_2b, c("f_potato"))
+expect_value("2B", df_2b, 37.69, function(x) max(x$f_potato), 2)
+
+expect_value("2C", df_2c)
+
+expect_names("3A", df_3a, c("temp_celsius", "alpha_co2_vs_gh2o_theoretical"))
+
+expect_names("3B", calculate_alpha_co2_vs_lh2o, "temp_celsius", formals)
+expect_func_value("3B", calculate_alpha_co2_vs_lh2o, 1.0466, 
+                  list(temp_celsius = 0), dec = 4)
+expect_names("3B", calculate_alpha_h2ol_vs_h2og, "temp_celsius", formals)
+expect_func_value("3B", calculate_alpha_h2ol_vs_h2og, 1.0117, 
+                  list(temp_celsius = 0), dec = 4)
+
+expect_names("3B", df_3b, c("temp_celsius", "alpha_co2_vs_gh2o_emp"))
+expect_value("3B", df_3b, 1.059, function(x) max(x$alpha_co2_vs_gh2o_emp), 3)
+
+expect_class("3C", p_3c, "ggplot")
+
+expect_names("4A", calculate_alpha_cc_vs_lh2o, "temp_celsius", formals)
+expect_func_value("4A", calculate_alpha_cc_vs_lh2o, 1.0350, 
+                  list(temp_celsius = 0), dec = 4)
+
+expect_class("4A", p_4a, "ggplot")
+
+expect_value("4B", delta_water, -5.132, dec = 3)
+
+expect_value("4C", delta_total, 7.5, dec = 1)
+expect_value("4C", delta_cc_final, 8.32, dec = 2)
+expect_value("4C", delta_h2o_final, 5.05, dec = 2)
+```
+
+
+
+
+
+
