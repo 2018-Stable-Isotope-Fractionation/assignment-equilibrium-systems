@@ -154,7 +154,7 @@ Plot the theoretical and empirical estimate of $\alpha_{CO_2/H_2O(g)}$ as $\epsi
 Friedman and O'Neil (1977) list the following temperature relationship for the equilibrium oxygen isotope fractionation factor between calcium carbonate and water ($^{18}\alpha_{CC/H2O}$) for the temperature range 0 to 500 Celsius in their *Compilation of Stable Isotope Fractionation Factors of Geochemical Interest* for the USGS (temperature $T$ in Kelvin): 
 
 $$
-\ln \, \alpha_{CC/H2O} = 2.78 \cdot 10^6 \frac{1}{T^2} - 2.89
+\ln \, \alpha_{CC/H2O} = 2.78 \cdot 10^3 \frac{1}{T^2} - 0.00289
 $$
 
 ## 4A: Fractionation factor
