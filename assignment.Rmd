@@ -57,7 +57,7 @@ Combine the two data frames (`df_1a_carbon` and `df_1b_boron`) into a new variab
 
 ## 1D: Bonus
 
-Starting with the exact mass balance equation below, show analytically what the error introduced by the mass-balance in $\delta$ space introduces.
+Starting with the exact mass balance equation, show analytically what the error introduced by the mass-balance in $\delta$ space introduces.
 
 # 2. Isotopes as tracers
 
