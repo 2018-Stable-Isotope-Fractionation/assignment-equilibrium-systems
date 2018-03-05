@@ -39,5 +39,8 @@ vignettes/*.pdf
 *.pdf
 *.docx
 
-# solutions
-*solutions.Rmd
+# include documentation
+!/docs/*
+
+# always exclude any solutions files or folders
+*solution*
