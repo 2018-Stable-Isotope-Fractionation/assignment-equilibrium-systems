@@ -75,7 +75,7 @@ $$
 
 ## 2B: Authentic rum?
 
-Based strictly on the numbers provided above, what percentage of the ethanol would you estimate to be potentially derived from the lower quality ingredient for each of the 3 new products? Store the result in column `f_potato` in a data frame named `df_2b` and comment on what you would tell the importer about the quality of their 3 new products.
+Based strictly on the numbers provided above, what percentage of the ethanol would you estimate to be potentially derived from the lower quality ingredient for each of the 3 new products? Store the result (in percent) in column `f_potato` in a data frame named `df_2b` and comment on what you would tell the importer about the quality of their 3 new products.
 
 ```{r}
 
