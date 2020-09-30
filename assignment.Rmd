@@ -26,14 +26,15 @@ In this exercise we will explore how large an error is introduced by doing mass-
 
 $$
 \begin{aligned}
-\text{exact : }& m_T \cdot F_T = \sum m_i \cdot F_i \\
-\text{approx. : }& m_T \cdot \delta_T = \sum m_i \cdot \delta_i
+\text{exact : }& \cdot F_T = \sum f_i \cdot F_i \\
+\text{approx. : }& \cdot \delta_T = \sum f_i \cdot \delta_i
 \end{aligned}
 $$
 
+
 ## 1A: Calculate error for carbon system
 
-Consider a system with two components $a$ and $b$, each making up 50% of the total isotopic pool ($f_a = f_b = 0.5$), with $\delta_a$ varying from -100‰ to +100‰ by steps of 10‰ and $\delta_b$ = 0‰ under all conditions. Calculate the resulting $\delta_T$ by appoximate (column `delta_t_approx`) and exact (column `delta_t_exact`) mass balance as well as the derived difference (column `delta_error = delta_t_approx - delta_t_exact`) all in permil notation for a carbon isotope system with reference ratio $R_{ref} = 0.01$. Store the resulting data frame in variable `df_1a_carbon`. Hint: the exact calculation requires conversion from $\delta$ space to fractional abundance and then back again to $\delta$ space. 
+Consider a system with two components $a$ and $b$, each making up 50% of the total isotopic pool ($f_a = f_b = 0.5$), with $\delta_a$ varying from -100‰ to +100‰ by steps of 10‰ and $\delta_b$ = 0‰ under all conditions. Calculate the resulting $\delta_T$ by approximate (column `delta_t_approx`) and exact (column `delta_t_exact`) mass balance as well as the derived difference (column `delta_error = delta_t_approx - delta_t_exact`) all in permil notation for a carbon isotope system with reference ratio $R_{ref} = 0.01$. Store the resulting data frame in variable `df_1a_carbon`. Hint: the exact calculation requires conversion from $\delta$ space to fractional abundance and then back again to $\delta$ space. 
 
 ```{r}
 
