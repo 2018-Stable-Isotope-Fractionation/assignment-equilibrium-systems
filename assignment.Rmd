@@ -26,8 +26,8 @@ In this exercise we will explore how large an error is introduced by doing mass-
 
 $$
 \begin{aligned}
-\text{exact : }& \cdot F_T = \sum f_i \cdot F_i \\
-\text{approx. : }& \cdot \delta_T = \sum f_i \cdot \delta_i
+\text{exact : }& F_T = \sum f_i \cdot F_i \\
+\text{approx. : }& \delta_T = \sum f_i \cdot \delta_i
 \end{aligned}
 $$
 
